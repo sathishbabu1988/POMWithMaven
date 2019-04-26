@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NoSuchWindowException;
@@ -262,6 +263,19 @@ public class SeleniumBase extends Reporter implements Browser, Element{
 		return false;
 
 	}
+	
+	public void performTabPress(WebElement ele) {
+		try {
+			if(ele.isDisplayed())
+			{
+				ele.sendKeys(Keys.TAB);
+				reportStep("TAB Key is pressed Successfully", "pass");
+			}
+		}catch(ElementNotInteractableException e) {
+			reportStep("Probelm is pressing TAB Key", "fail");
+			throw new RuntimeException();
+		}
+	}
 
 	@Override
 	public void startApp(String url) {
@@ -328,6 +342,7 @@ public class SeleniumBase extends Reporter implements Browser, Element{
 			case "class": return driver.findElementsByClassName(value);
 			case "link": return driver.findElementsByLinkText(value);
 			case "xpath": return driver.findElementsByXPath(value);
+			case "tagname": return driver.findElementsByTagName(value);
 			}
 		} catch (NoSuchElementException e) {
 			System.err.println("The Element with locator:"+type+" Not Found with value: "+value);

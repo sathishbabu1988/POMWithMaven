@@ -185,4 +185,13 @@ public interface Element {
 	 */
 	public boolean verifySelected(WebElement ele);
 	
+	/**
+	 * This method will press a TAB Key from the WebElement
+	 * @param ele   - The Webelement from which TAB Key need to be pressed
+	 * @author Sathish Babu
+	 * @since 25th April 2019
+	 * @see locateElement method in Browser Class
+	 */
+	public void performTabPress(WebElement ele);
+	
 }
